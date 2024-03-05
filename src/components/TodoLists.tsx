@@ -1,12 +1,10 @@
-import { Todo } from "../types/Todos";
+import { useAppSelector } from "../redux/config/configStore";
 import * as St from "./styles/todoLists.style";
 import TodoItem from "./TodoItem";
 
-type TodoListProps = {
-  todos: Todo[];
-};
+const TodoLists: React.FC = () => {
+  const todos = useAppSelector((state) => state.todoReducer);
 
-const TodoLists: React.FC<TodoListProps> = ({ todos }) => {
   const workingTodos = todos.filter((todo) => !todo.isDone);
   const doneTodos = todos.filter((todo) => todo.isDone);
 
