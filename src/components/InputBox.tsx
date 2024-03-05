@@ -8,8 +8,7 @@ type InputBoxProp = {
 const InputBox: React.FC<InputBoxProp> = ({ setTodos }) => {
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const title = (e.currentTarget.namedItem("title") as HTMLInputElement)
-      .value;
+    const title = e.currentTarget.title.value;
     const body = e.currentTarget.body.value;
     const deadline = e.currentTarget.trip.value;
 
