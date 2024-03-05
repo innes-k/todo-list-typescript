@@ -2,7 +2,12 @@ import { Todo } from "../types/Todos";
 import * as St from "./styles/todoLists.style";
 import TodoItem from "./TodoItem";
 
-const TodoLists: React.FC = ({ todos, setTodos }: { todos: Todo[] }) => {
+type TodoListProps = {
+  todos: Todo[];
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+};
+
+const TodoLists: React.FC<TodoListProps> = ({ todos, setTodos }) => {
   const workingTodos = todos.filter((todo) => !todo.isDone);
   const doneTodos = todos.filter((todo) => todo.isDone);
 

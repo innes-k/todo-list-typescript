@@ -1,7 +1,11 @@
 import { Todo } from "../types/Todos";
 import * as St from "./styles/InputBox.styles";
 
-const InputBox: React.FC = ({ setTodos }) => {
+type InputBoxProp = {
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+};
+
+const InputBox: React.FC<InputBoxProp> = ({ setTodos }) => {
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const title = (e.currentTarget.namedItem("title") as HTMLInputElement)

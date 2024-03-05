@@ -76,7 +76,6 @@ export const RemoveBtn = styled.button`
 `;
 
 export const CompleteBtn = styled.button<{ $isDone: boolean }>`
-  // ⭐️ type지정!
   width: 80px;
   margin-bottom: 10px;
 

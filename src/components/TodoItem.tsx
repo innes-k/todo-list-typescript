@@ -1,7 +1,12 @@
 import { Todo } from "../types/Todos";
 import * as St from "./styles/todoLists.style";
 
-const TodoItem: React.FC = ({ todos, setTodos }: { todos: Todo[] }) => {
+type TodoItemProps = {
+  todos: Todo[];
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+};
+
+const TodoItem: React.FC<TodoItemProps> = ({ todos, setTodos }) => {
   const reLocateHandler = (id: string): void => {
     setTodos((prevTodos: Todo[]) =>
       prevTodos.map((todo) => {
