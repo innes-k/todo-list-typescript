@@ -1,29 +1,28 @@
-import { Todo } from "../types/Todos";
+import { useDispatch } from "react-redux";
 import * as St from "./styles/InputBox.styles";
+import { addTodo } from "../redux/modules/todoSlice";
 
-type InputBoxProp = {
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-};
+const InputBox: React.FC = () => {
+  const dispatch = useDispatch();
 
-const InputBox: React.FC<InputBoxProp> = ({ setTodos }) => {
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const title = e.currentTarget.title.value;
     const body = e.currentTarget.body.value;
     const deadline = e.currentTarget.trip.value;
 
-    setTodos((todos: Todo[]) => [
-      ...todos,
-      {
-        id: Date.now().toString(),
-        title: title,
-        body: body,
-        isDone: false,
-        deadline: deadline,
-      },
-    ]);
+    const newTodo = {
+      id: Date.now().toString(),
+      title: title,
+      body: body,
+      isDone: false,
+      deadline: deadline,
+    };
+
+    dispatch(addTodo(newTodo));
+
     e.currentTarget.reset();
-    console.log(title, body, deadline);
   };
   return (
     <St.Container>
