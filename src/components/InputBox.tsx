@@ -8,13 +8,13 @@ const InputBox: React.FC = () => {
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const title = e.currentTarget.title.value;
+    const titleValue = e.currentTarget.titleValue.value;
     const body = e.currentTarget.body.value;
     const deadline = e.currentTarget.trip.value;
 
     const newTodo = {
       id: Date.now().toString(),
-      title: title,
+      title: titleValue,
       body: body,
       isDone: false,
       deadline: deadline,
@@ -26,8 +26,8 @@ const InputBox: React.FC = () => {
   };
   return (
     <St.Container>
-      <St.Title onSubmit={onSubmitHandler}>
-        <St.TitleInput name="title" placeholder="제목" />
+      <St.Title onSubmit={onSubmitHandler} name="hello">
+        <St.TitleInput name="titleValue" placeholder="제목" />
         <St.TitleInput name="body" placeholder="내용" />
         <St.Time>
           <label htmlFor="start">마감일 :</label>
