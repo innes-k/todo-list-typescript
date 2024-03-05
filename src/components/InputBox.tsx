@@ -1,24 +1,26 @@
+import { Todo } from "../types/Todos";
 import * as St from "./styles/InputBox.styles";
 
-// input Box 컴포넌트 (상단의 제목, 내용, 추가하기)
-function InputBox({ setTodos }) {
-  const onSubmitHandler = (e) => {
+const InputBox: React.FC = ({ setTodos }) => {
+  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const title = e.target.title.value;
-    const body = e.target.body.value;
-    const deadline = e.target.trip.value;
+    const title = (e.currentTarget.namedItem("title") as HTMLInputElement)
+      .value;
+    const body = e.currentTarget.body.value;
+    const deadline = e.currentTarget.trip.value;
 
-    setTodos((todo) => [
-      ...todo,
+    setTodos((todos: Todo[]) => [
+      ...todos,
       {
-        id: Date.now(),
+        id: Date.now().toString(),
         title: title,
         body: body,
         isDone: false,
         deadline: deadline,
       },
     ]);
-    e.target.reset();
+    e.currentTarget.reset();
+    console.log(title, body, deadline);
   };
   return (
     <St.Container>
@@ -43,6 +45,6 @@ function InputBox({ setTodos }) {
       </St.Title>
     </St.Container>
   );
-}
+};
 
 export default InputBox;
