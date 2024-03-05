@@ -1,8 +1,9 @@
-import * as St from "./styles/working.style";
+import { Todo } from "../types/Todos";
+import * as St from "./styles/todoLists.style";
 
-const TodoItem = ({ todos, setTodos }) => {
-  const reLocateHandler = (id) => {
-    setTodos((prevTodos) =>
+const TodoItem: React.FC = ({ todos, setTodos }: { todos: Todo[] }) => {
+  const reLocateHandler = (id: string): void => {
+    setTodos((prevTodos: Todo[]) =>
       prevTodos.map((todo) => {
         if (todo.id === id) {
           return { ...todo, isDone: !todo.isDone };
@@ -13,7 +14,7 @@ const TodoItem = ({ todos, setTodos }) => {
   };
 
   // 삭제버튼 onclick
-  const removeHandler = function (id) {
+  const removeHandler = (id: string): void => {
     const removeBox = todos.filter((todo) => {
       return todo.id !== id;
     });

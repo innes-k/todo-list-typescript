@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Title = styled.div`
   display: flex;
@@ -75,12 +75,14 @@ export const RemoveBtn = styled.button`
   border-radius: 10px;
 `;
 
-export const CompleteBtn = styled.button`
+export const CompleteBtn = styled.button<{ $isDone: boolean }>`
+  // ⭐️ type지정!
   width: 80px;
   margin-bottom: 10px;
 
   color: rgb(91, 91, 91);
-  background-color: rgba(235, 154, 2, 0.92);
+  background-color: ${(props) =>
+    props.$isDone ? css`rgb(101, 161, 211)` : css`rgba(235, 154, 2, 0.92)`};
   border: 0px;
   border-radius: 10px;
   color: white;

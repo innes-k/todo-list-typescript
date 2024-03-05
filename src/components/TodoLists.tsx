@@ -1,8 +1,8 @@
-import * as St from "./styles/working.style";
+import { Todo } from "../types/Todos";
+import * as St from "./styles/todoLists.style";
 import TodoItem from "./TodoItem";
-// import Working from "./Working.jsx";
 
-const TodoLists = ({ todos, setTodos }) => {
+const TodoLists: React.FC = ({ todos, setTodos }: { todos: Todo[] }) => {
   const workingTodos = todos.filter((todo) => !todo.isDone);
   const doneTodos = todos.filter((todo) => todo.isDone);
 
@@ -29,7 +29,6 @@ const TodoLists = ({ todos, setTodos }) => {
         <St.TodoListFlex>
           <TodoItem todos={doneTodos} setTodos={setTodos} />
         </St.TodoListFlex>
-        {/* <Working box={box} setBox={setBox} /> */}
       </div>
     </>
   );
