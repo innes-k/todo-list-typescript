@@ -68,6 +68,7 @@ export const RemoveBtn = styled.button`
   width: 80px;
   height: 30px;
   margin-bottom: 10px;
+  cursor: pointer;
 
   color: rgb(91, 91, 91);
   background-color: rgb(255, 236, 130);
@@ -78,6 +79,7 @@ export const RemoveBtn = styled.button`
 export const CompleteBtn = styled.button<{ $isDone: boolean }>`
   width: 80px;
   margin-bottom: 10px;
+  cursor: pointer;
 
   color: rgb(91, 91, 91);
   background-color: ${(props) =>

@@ -1,29 +1,18 @@
+import { useDispatch } from "react-redux";
 import { Todo } from "../types/Todos";
 import * as St from "./styles/todoLists.style";
+import { deleteTodo } from "../redux/modules/todoSlice";
 
 type TodoItemProps = {
   todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 };
 
-const TodoItem: React.FC<TodoItemProps> = ({ todos, setTodos }) => {
-  const reLocateHandler = (id: string): void => {
-    setTodos((prevTodos: Todo[]) =>
-      prevTodos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, isDone: !todo.isDone };
-        }
-        return todo;
-      })
-    );
-  };
+const TodoItem: React.FC<TodoItemProps> = ({ todos }) => {
+  const dispatch = useDispatch();
 
   // 삭제버튼 onclick
   const removeHandler = (id: string): void => {
-    const removeBox = todos.filter((todo) => {
-      return todo.id !== id;
-    });
-    setTodos(removeBox);
+    dispatch(deleteTodo(id));
   };
   return (
     <>
@@ -47,7 +36,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todos, setTodos }) => {
                 삭제하기
               </St.RemoveBtn>
               <St.CompleteBtn
-                onClick={() => reLocateHandler(todo.id)}
+                // onClick={() => reLocateHandler(todo.id)}
                 $isDone={todo.isDone}
               >
                 {todo.isDone ? "취소하기" : "완료하기"}

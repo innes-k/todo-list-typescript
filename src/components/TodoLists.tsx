@@ -4,10 +4,9 @@ import TodoItem from "./TodoItem";
 
 type TodoListProps = {
   todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 };
 
-const TodoLists: React.FC<TodoListProps> = ({ todos, setTodos }) => {
+const TodoLists: React.FC<TodoListProps> = ({ todos }) => {
   const workingTodos = todos.filter((todo) => !todo.isDone);
   const doneTodos = todos.filter((todo) => todo.isDone);
 
@@ -22,7 +21,7 @@ const TodoLists: React.FC<TodoListProps> = ({ todos, setTodos }) => {
           </St.TitleSelect>
         </St.Title>
         <St.TodoListFlex>
-          <TodoItem todos={workingTodos} setTodos={setTodos} />
+          <TodoItem todos={workingTodos} />
         </St.TodoListFlex>
         <St.Title>
           <St.TitleSpan>👍🏻 Done </St.TitleSpan>
@@ -32,7 +31,7 @@ const TodoLists: React.FC<TodoListProps> = ({ todos, setTodos }) => {
           </St.TitleSelect>
         </St.Title>
         <St.TodoListFlex>
-          <TodoItem todos={doneTodos} setTodos={setTodos} />
+          <TodoItem todos={doneTodos} />
         </St.TodoListFlex>
       </div>
     </>
