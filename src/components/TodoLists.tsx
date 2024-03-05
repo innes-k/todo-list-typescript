@@ -1,19 +1,33 @@
+import { useState } from "react";
 import { useAppSelector } from "../redux/config/configStore";
+import { Todo } from "../types/Todos";
 import * as St from "./styles/todoLists.style";
 import TodoItem from "./TodoItem";
 
 const TodoLists: React.FC = () => {
-  const todos = useAppSelector((state) => state.todoReducer);
+  const todos: Todo[] = useAppSelector((state) => state.todoReducer);
+  const [sortOrder, setSortOrder] = useState("asc");
 
-  const workingTodos = todos.filter((todo) => !todo.isDone);
-  const doneTodos = todos.filter((todo) => todo.isDone);
+  const onSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortOrder(e.target.value);
+  };
+
+  const sortedTodos = [...todos].sort((a, b) => {
+    if (sortOrder === "asc") {
+      return new Date(b.deadline) - new Date(a.deadline);
+    }
+    return new Date(a.deadline) - new Date(b.deadline);
+  });
+
+  const workingTodos = sortedTodos.filter((todo) => !todo.isDone);
+  const doneTodos = sortedTodos.filter((todo) => todo.isDone);
 
   return (
     <>
       <div>
         <St.Title>
           <St.TitleSpan>📝 Working </St.TitleSpan>
-          <St.TitleSelect>
+          <St.TitleSelect onChange={onSortChange}>
             <option value="asc">오름차순</option>
             <option value="desc">내림차순</option>
           </St.TitleSelect>
@@ -23,7 +37,7 @@ const TodoLists: React.FC = () => {
         </St.TodoListFlex>
         <St.Title>
           <St.TitleSpan>👍🏻 Done </St.TitleSpan>
-          <St.TitleSelect>
+          <St.TitleSelect onChange={onSortChange}>
             <option value="asc">오름차순</option>
             <option value="desc">내림차순</option>
           </St.TitleSelect>
@@ -35,5 +49,4 @@ const TodoLists: React.FC = () => {
     </>
   );
 };
-
 export default TodoLists;
