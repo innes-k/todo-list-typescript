@@ -25,12 +25,10 @@ const TodoItem: React.FC<TodoItemProps> = ({ todos }) => {
   });
 
   const removeHandler = (id: string): void => {
-    // deleteTodo(id);
     deleteTodoItem(id);
   };
 
   const reLocateHandler = (todo: Todo): void => {
-    // toggleTodo(todo);
     toggleTodoItem(todo);
   };
   return (
