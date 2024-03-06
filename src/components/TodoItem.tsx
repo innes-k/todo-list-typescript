@@ -25,7 +25,8 @@ const TodoItem: React.FC<TodoItemProps> = ({ todos }) => {
   });
 
   const removeHandler = (id: string): void => {
-    deleteTodoItem(id);
+    const check = window.confirm("삭제하시겠습니까?");
+    check && deleteTodoItem(id);
   };
 
   const reLocateHandler = (todo: Todo): void => {
