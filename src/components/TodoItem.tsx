@@ -16,7 +16,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todos }) => {
   };
 
   // toggle
-  const reLocateHandler = (id: string) => {
+  const reLocateHandler = (id: string): void => {
     dispatch(toggleTodo(id));
   };
   return (

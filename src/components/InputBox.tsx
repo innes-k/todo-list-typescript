@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import * as St from "./styles/InputBox.styles";
 import { addTodo } from "../redux/modules/todoSlice";
+import { Todo } from "../types/Todos";
 
 const InputBox: React.FC = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const InputBox: React.FC = () => {
     const body = e.currentTarget.body.value;
     const deadline = e.currentTarget.trip.value;
 
-    const newTodo = {
+    const newTodo: Todo = {
       id: Date.now().toString(),
       title: titleValue,
       body: body,

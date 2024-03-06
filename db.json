@@ -1,0 +1,18 @@
+{
+  "todos": [
+    {
+      "id": "1",
+      "title": "Todo List 정복!",
+      "body": "Todo List를 마스터해보자",
+      "isDone": false,
+      "deadline": "2024-01-31"
+    },
+    {
+      "id": "2",
+      "title": "typescript!",
+      "body": "typescript 연습하기",
+      "isDone": false,
+      "deadline": "2024-03-06"
+    }
+  ]
+}
