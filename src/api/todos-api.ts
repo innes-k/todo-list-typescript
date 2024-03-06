@@ -20,3 +20,7 @@ export const addTodo = async (newTodo: Todo): Promise<void> => {
 export const deleteTodo = async (id: string): Promise<void> => {
   await todoClient.delete(`/${id}`);
 };
+
+export const toggleTodo = async (todo: Todo): Promise<void> => {
+  await todoClient.patch(`${todo.id}`, { ...todo, isDone: !todo.isDone });
+};

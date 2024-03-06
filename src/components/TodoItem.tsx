@@ -1,5 +1,5 @@
 // import { useDispatch } from "react-redux";
-import { deleteTodo } from "../api/todos-api";
+import { deleteTodo, toggleTodo } from "../api/todos-api";
 import { Todo } from "../types/Todos";
 import * as St from "./styles/todoLists.style";
 // import { deleteTodo, toggleTodo } from "../redux/modules/todoSlice";
@@ -18,8 +18,9 @@ const TodoItem: React.FC<TodoItemProps> = ({ todos }) => {
   };
 
   // toggle
-  const reLocateHandler = (id: string): void => {
-    dispatch(toggleTodo(id));
+  const reLocateHandler = (todo: Todo): void => {
+    // dispatch(toggleTodo(id));
+    toggleTodo(todo);
   };
   return (
     <>
@@ -43,7 +44,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todos }) => {
                 삭제하기
               </St.RemoveBtn>
               <St.CompleteBtn
-                onClick={() => reLocateHandler(todo.id)}
+                onClick={() => reLocateHandler(todo)}
                 $isDone={todo.isDone}
               >
                 {todo.isDone ? "취소하기" : "완료하기"}
