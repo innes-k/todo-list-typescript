@@ -16,7 +16,7 @@ const TodoLists: React.FC = () => {
       setTodos(data);
     };
     fetchData();
-  }, []);
+  }, [todos]);
 
   const onSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(e.target.value);
