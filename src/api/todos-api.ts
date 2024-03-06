@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Todo } from "../types/Todos";
 
 const todoClient = axios.create({
   baseURL: "http://localhost:5100/todos",
@@ -7,7 +8,7 @@ const todoClient = axios.create({
   },
 });
 
-export const getTodo = async () => {
+export const getTodo = async (): Promise<Todo[]> => {
   const res = await todoClient.get("/");
   return res.data;
 };
