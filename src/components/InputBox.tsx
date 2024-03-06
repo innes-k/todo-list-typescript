@@ -1,8 +1,18 @@
 import * as St from "./styles/InputBox.styles";
 import { Todo } from "../types/Todos";
 import { addTodo } from "../api/todos-api";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const InputBox: React.FC = () => {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (newTodo: Todo): Promise<void> => addTodo(newTodo),
+    onSuccess: () => {
+      queryClient.invalidateQueries("todos");
+    },
+  });
+
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -18,7 +28,8 @@ const InputBox: React.FC = () => {
       deadline: deadline,
     };
 
-    addTodo(newTodo);
+    // addTodo(newTodo);
+    mutation.mutate(newTodo);
 
     e.currentTarget.reset();
   };

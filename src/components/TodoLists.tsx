@@ -5,23 +5,14 @@ import TodoItem from "./TodoItem";
 import { getTodos } from "../api/todos-api";
 import { useQuery } from "@tanstack/react-query";
 
-interface TodosType {
+export interface TodosType {
   data: Todo[] | undefined;
   isLoading: boolean;
   isError: boolean;
 }
 
 const TodoLists: React.FC = () => {
-  // const [todos, setTodos] = useState<Todo[]>([]);
   const [sortOrder, setSortOrder] = useState("asc");
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const data = await getTodos();
-  //     setTodos(data);
-  //   };
-  //   fetchData();
-  // }, [todos]);
 
   const {
     data: todos,
