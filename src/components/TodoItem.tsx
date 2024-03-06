@@ -1,3 +1,4 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteTodo, toggleTodo } from "../api/todos-api";
 import { Todo } from "../types/Todos";
 import * as St from "./styles/todoLists.style";
@@ -7,12 +8,30 @@ type TodoItemProps = {
 };
 
 const TodoItem: React.FC<TodoItemProps> = ({ todos }) => {
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteTodoItem } = useMutation({
+    mutationFn: (id: string): Promise<void> => deleteTodo(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries("todos");
+    },
+  });
+
+  const { mutate: toggleTodoItem } = useMutation({
+    mutationFn: (todo: Todo): Promise<void> => toggleTodo(todo),
+    onSuccess: () => {
+      queryClient.invalidateQueries("todos");
+    },
+  });
+
   const removeHandler = (id: string): void => {
-    deleteTodo(id);
+    // deleteTodo(id);
+    deleteTodoItem(id);
   };
 
   const reLocateHandler = (todo: Todo): void => {
-    toggleTodo(todo);
+    // toggleTodo(todo);
+    toggleTodoItem(todo);
   };
   return (
     <>
