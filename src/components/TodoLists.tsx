@@ -3,7 +3,7 @@ import { useAppSelector } from "../redux/config/configStore";
 import { Todo } from "../types/Todos";
 import * as St from "./styles/todoLists.style";
 import TodoItem from "./TodoItem";
-import { getTodo } from "../api/todos-api";
+import { getTodos } from "../api/todos-api";
 
 const TodoLists: React.FC = () => {
   // const todos: Todo[] = useAppSelector((state) => state.todoReducer);
@@ -12,7 +12,7 @@ const TodoLists: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getTodo();
+      const data = await getTodos();
       setTodos(data);
     };
     fetchData();

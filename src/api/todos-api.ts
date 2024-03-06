@@ -8,7 +8,11 @@ const todoClient = axios.create({
   },
 });
 
-export const getTodo = async (): Promise<Todo[]> => {
+export const getTodos = async (): Promise<Todo[]> => {
   const res = await todoClient.get("/");
   return res.data;
+};
+
+export const addTodo = async (newTodo: Todo): Promise<void> => {
+  await todoClient.post("/", newTodo);
 };

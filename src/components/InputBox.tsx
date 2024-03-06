@@ -1,10 +1,10 @@
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import * as St from "./styles/InputBox.styles";
 import { addTodo } from "../redux/modules/todoSlice";
 import { Todo } from "../types/Todos";
 
 const InputBox: React.FC = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,7 +21,8 @@ const InputBox: React.FC = () => {
       deadline: deadline,
     };
 
-    dispatch(addTodo(newTodo));
+    // dispatch(addTodo(newTodo));
+    addTodo(newTodo);
 
     e.currentTarget.reset();
   };
