@@ -39,7 +39,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todos }) => {
           <St.TodoList key={todo.id}>
             <St.TodoListBody>
               <St.Span>{todo.title}</St.Span>
-              <p>{todo.body}</p>
+              <p>{todo.content}</p>
               <St.Time>
                 {new Date(todo.deadline).toLocaleDateString("ko-KR", {
                   year: "numeric",
