@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppSelector } from "../redux/config/configStore";
 import { Todo } from "../types/Todos";
 import * as St from "./styles/todoLists.style";
 import TodoItem from "./TodoItem";
+import { getTodo } from "../api/todos-api";
 
 const TodoLists: React.FC = () => {
-  const todos: Todo[] = useAppSelector((state) => state.todoReducer);
+  // const todos: Todo[] = useAppSelector((state) => state.todoReducer);
+  const [todos, setTodos] = useState<Todo[]>([]);
   const [sortOrder, setSortOrder] = useState("asc");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getTodo();
+      setTodos(data);
+    };
+    fetchData();
+  }, []);
 
   const onSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(e.target.value);
