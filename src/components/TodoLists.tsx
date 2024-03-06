@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../redux/config/configStore";
+// import { useAppSelector } from "../redux/config/configStore";
 import { Todo } from "../types/Todos";
 import * as St from "./styles/todoLists.style";
 import TodoItem from "./TodoItem";

@@ -16,3 +16,7 @@ export const getTodos = async (): Promise<Todo[]> => {
 export const addTodo = async (newTodo: Todo): Promise<void> => {
   await todoClient.post("/", newTodo);
 };
+
+export const deleteTodo = async (id: string): Promise<void> => {
+  await todoClient.delete(`/${id}`);
+};

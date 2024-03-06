@@ -1,18 +1,20 @@
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
+import { deleteTodo } from "../api/todos-api";
 import { Todo } from "../types/Todos";
 import * as St from "./styles/todoLists.style";
-import { deleteTodo, toggleTodo } from "../redux/modules/todoSlice";
+// import { deleteTodo, toggleTodo } from "../redux/modules/todoSlice";
 
 type TodoItemProps = {
   todos: Todo[];
 };
 
 const TodoItem: React.FC<TodoItemProps> = ({ todos }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // 삭제버튼 onclick
   const removeHandler = (id: string): void => {
-    dispatch(deleteTodo(id));
+    // dispatch(deleteTodo(id));
+    deleteTodo(id);
   };
 
   // toggle
