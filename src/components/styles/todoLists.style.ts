@@ -35,6 +35,7 @@ export const TodoList = styled.article`
   width: 250px;
   padding: 20px 20px 10px 20px;
   margin: 14px;
+  cursor: pointer;
 
   display: flex;
   flex-direction: column;
