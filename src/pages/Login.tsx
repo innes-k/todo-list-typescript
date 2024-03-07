@@ -1,10 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { UserLogin } from "../api/auth-api";
 
 export const Login = () => {
+  const navigate = useNavigate();
+  const onLoginHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const id = formData.get("id") as string;
+    const password = formData.get("password") as string;
+
+    try {
+      const data = await UserLogin({ id, password });
+      console.log("data", data);
+      sessionStorage.setItem("token", data.accessToken);
+      navigate("/");
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
   return (
     <Container>
-      <Form>
+      <Form onSubmit={onLoginHandler}>
         <p>☁️ 로그인 ⛅️</p>
         <input type="text" name="id" placeholder="email" />
         <input type="password" name="password" placeholder="비밀번호" />

@@ -5,6 +5,8 @@ import { signUp } from "../api/auth-api";
 export const SignUp = () => {
   const navigate = useNavigate();
   const onSignUpHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     const formData = new FormData(e.currentTarget);
     const id = formData.get("id") as string;
     const nickname = formData.get("nickname") as string;
