@@ -1,27 +1,13 @@
 import { useState } from "react";
-import { Todo } from "../types/Todos";
 import * as St from "./styles/todoLists.style";
 import TodoItem from "./TodoItem";
-import { getTodos } from "../api/todos-api";
-import { useQuery } from "@tanstack/react-query";
-
-export interface TodosType {
-  data: Todo[] | undefined;
-  isLoading: boolean;
-  isError: boolean;
-}
+import { useTodoQuery } from "../hooks/useTodoQuery";
 
 const TodoLists: React.FC = () => {
   const [sortOrder, setSortOrder] = useState("asc");
 
-  const {
-    data: todos,
-    isLoading,
-    isError,
-  }: TodosType = useQuery({
-    queryKey: ["todos"],
-    queryFn: getTodos,
-  });
+  // custom hook
+  const { todos, isLoading, isError } = useTodoQuery();
 
   if (isLoading) {
     return <div>Loading...</div>;

@@ -1,6 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteTodo, getTodos, toggleTodo, updateTodo } from "../api/todos-api";
+import { deleteTodo, toggleTodo, updateTodo } from "../api/todos-api";
 import * as St from "../components/styles/todoLists.style";
 import { Todo } from "../types/Todos";
 import { useState } from "react";
@@ -12,6 +12,7 @@ import {
   EditCompleteButton,
   EditSection,
 } from "./detail.style";
+import { useTodoQuery } from "../hooks/useTodoQuery";
 
 const Detail = () => {
   const paramsId = useParams().id;
@@ -47,7 +48,7 @@ const Detail = () => {
       todo: Todo;
       newTitle: string;
       newContent: string;
-    }) => updateTodo(todo, newTitle, newContent),
+    }): Promise<void> => updateTodo(todo, newTitle, newContent),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["todos"],
@@ -55,14 +56,8 @@ const Detail = () => {
     },
   });
 
-  const {
-    data: todos,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["todos"],
-    queryFn: getTodos,
-  });
+  // custom hook
+  const { todos, isLoading, isError } = useTodoQuery();
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>error</div>;
@@ -78,11 +73,11 @@ const Detail = () => {
     toggleTodoItem(todo);
   };
 
-  const onEditTrueHandler = () => {
+  const onEditTrueHandler = (): void => {
     setIsEdit((prev) => !prev);
   };
 
-  const onEditHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const onEditHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const newTitle = formData.get("title") as string;
