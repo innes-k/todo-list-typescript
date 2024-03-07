@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { deleteTodo, getTodos, toggleTodo, updateTodo } from "../api/todos-api";
 import * as St from "../components/styles/todoLists.style";
 import { Todo } from "../types/Todos";
@@ -15,6 +15,7 @@ import {
 
 const Detail = () => {
   const paramsId = useParams().id;
+  const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState(false);
 
   const queryClient = useQueryClient();
@@ -89,6 +90,7 @@ const Detail = () => {
 
     todo && updateTodoItem({ todo, newTitle, newContent });
     setIsEdit((prev) => !prev);
+    navigate("/");
   };
 
   return (
