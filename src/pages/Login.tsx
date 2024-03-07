@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Login = () => {
@@ -8,6 +9,12 @@ export const Login = () => {
         <input type="text" name="id" placeholder="email" />
         <input type="password" name="password" placeholder="비밀번호" />
         <input type="submit" value="로그인" />
+        <div>
+          <span>회원이 아니신가요? &rarr; </span>
+          <LinkToSignUp style={{ cursor: "pointer" }} to="/signUp">
+            회원가입하기
+          </LinkToSignUp>
+        </div>
       </Form>
     </Container>
   );
@@ -27,7 +34,7 @@ const Form = styled.form`
   gap: 10px;
   border: 2px solid white;
   border-radius: 12px;
-  height: 35%;
+  height: 37%;
   width: 400px;
 
   & > p {
@@ -49,4 +56,20 @@ const Form = styled.form`
     font-weight: 700;
     color: white;
   }
+
+  & > div {
+    margin-top: 15px;
+  }
+  & > div > span {
+    font-size: 12px;
+    color: #40679e;
+  }
+`;
+
+const LinkToSignUp = styled(Link)`
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 900;
+  font-size: 15px;
+  color: #40679e;
 `;
