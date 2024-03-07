@@ -4,7 +4,7 @@
       "id": "2",
       "title": "typescript!",
       "content": "typescript 연습하기",
-      "isDone": false,
+      "isDone": true,
       "deadline": "2024-03-06"
     },
     {

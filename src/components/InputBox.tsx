@@ -37,7 +37,7 @@ const InputBox: React.FC = () => {
   };
   return (
     <St.Container>
-      <St.Title onSubmit={onSubmitHandler} name="hello">
+      <St.Title onSubmit={onSubmitHandler}>
         <St.TitleInput name="title" placeholder="제목" />
         <St.TitleInput name="content" placeholder="내용" />
         <St.Time>

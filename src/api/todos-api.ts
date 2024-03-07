@@ -24,3 +24,15 @@ export const deleteTodo = async (id: string): Promise<void> => {
 export const toggleTodo = async (todo: Todo): Promise<void> => {
   await todoClient.patch(`${todo.id}`, { ...todo, isDone: !todo.isDone });
 };
+
+export const updateTodo = async (
+  todo: Todo,
+  title: string,
+  content: string
+): Promise<void> => {
+  await todoClient.patch(`/${todo.id}`, {
+    ...todo,
+    title,
+    content,
+  });
+};
