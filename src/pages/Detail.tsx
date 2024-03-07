@@ -10,9 +10,6 @@ const Detail = () => {
   const paramsId = useParams().id;
   const [isEdit, setIsEdit] = useState(false);
 
-  // 1. '수정하기'클릭 - isEdit true로, title, content form태그의 input으로
-  // 2. '수정완료'클릭 - mutation, update api (updateTodo라고해서 title, content 담긴 todo api로 보내기)
-
   const queryClient = useQueryClient();
 
   const { mutate: deleteTodoItem } = useMutation({
@@ -34,8 +31,15 @@ const Detail = () => {
   });
 
   const { mutate: updateTodoItem } = useMutation({
-    mutationFn: (todo: Todo, title: string, content: string): Promise<void> =>
-      updateTodo(todo, title, content),
+    mutationFn: ({
+      todo,
+      newTitle,
+      newContent,
+    }: {
+      todo: Todo;
+      newTitle: string;
+      newContent: string;
+    }) => updateTodo(todo, newTitle, newContent),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["todos"],
@@ -76,7 +80,7 @@ const Detail = () => {
     const newTitle = formData.get("title") as string;
     const newContent = formData.get("content") as string;
 
-    updateTodoItem(todo, newTitle, newContent);
+    todo && updateTodoItem({ todo, newTitle, newContent });
     setIsEdit((prev) => !prev);
   };
 

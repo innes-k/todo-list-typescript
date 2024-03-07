@@ -2,9 +2,9 @@
   "todos": [
     {
       "id": "2",
-      "title": "typescript!",
-      "content": "typescript 연습하기",
-      "isDone": true,
+      "title": "typescript!333",
+      "content": "typescript 연습하기333",
+      "isDone": false,
       "deadline": "2024-03-06"
     },
     {
