@@ -13,14 +13,18 @@ const TodoItem: React.FC<TodoItemProps> = ({ todos }) => {
   const { mutate: deleteTodoItem } = useMutation({
     mutationFn: (id: string): Promise<void> => deleteTodo(id),
     onSuccess: () => {
-      queryClient.invalidateQueries("todos");
+      queryClient.invalidateQueries({
+        queryKey: ["todos"],
+      });
     },
   });
 
   const { mutate: toggleTodoItem } = useMutation({
     mutationFn: (todo: Todo): Promise<void> => toggleTodo(todo),
     onSuccess: () => {
-      queryClient.invalidateQueries("todos");
+      queryClient.invalidateQueries({
+        queryKey: ["todos"],
+      });
     },
   });
 

@@ -9,7 +9,9 @@ const InputBox: React.FC = () => {
   const mutation = useMutation({
     mutationFn: (newTodo: Todo): Promise<void> => addTodo(newTodo),
     onSuccess: () => {
-      queryClient.invalidateQueries("todos");
+      queryClient.invalidateQueries({
+        queryKey: ["todos"],
+      });
     },
   });
 
@@ -21,10 +23,6 @@ const InputBox: React.FC = () => {
     const content = formData.get("content") as string;
     const deadline = formData.get("deadline") as string;
 
-    // const titleValue = e.currentTarget.titleValue.value;
-    // const body = e.currentTarget.body.value;
-    // const deadline = e.currentTarget.trip.value;
-
     const newTodo: Todo = {
       id: Date.now().toString(),
       title,
@@ -33,7 +31,6 @@ const InputBox: React.FC = () => {
       deadline,
     };
 
-    // addTodo(newTodo);
     mutation.mutate(newTodo);
 
     e.currentTarget.reset();

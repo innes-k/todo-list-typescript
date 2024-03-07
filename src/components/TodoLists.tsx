@@ -36,10 +36,12 @@ const TodoLists: React.FC = () => {
 
   const sortedTodos = todos
     ? [...todos].sort((a, b) => {
+        const deadlineA = new Date(a.deadline);
+        const deadlineB = new Date(b.deadline);
         if (sortOrder === "asc") {
-          return new Date(b.deadline) - new Date(a.deadline);
+          return +deadlineB - +deadlineA;
         }
-        return new Date(a.deadline) - new Date(b.deadline);
+        return +deadlineA - +deadlineB;
       })
     : [];
 
