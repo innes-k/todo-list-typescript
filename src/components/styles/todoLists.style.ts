@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 export const Title = styled.div`
@@ -20,6 +21,11 @@ export const TodoListFlex = styled.div`
   min-height: 150px;
   border-top: 2px solid rgb(242, 242, 242);
   margin-bottom: 2rem;
+`;
+
+export const DetailLink = styled(Link)`
+  text-decoration: none;
+  color: black;
 `;
 
 export const TodoList = styled.article`
