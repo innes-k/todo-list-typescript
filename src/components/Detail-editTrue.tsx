@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+import { useTodoMutation } from "../hooks/useTodoMutation";
 import { Todo } from "../types/Todos";
 import {
   EditButtons,
@@ -7,11 +9,30 @@ import {
 } from "./styles/detail-editTrue.style";
 import { Time } from "./styles/todoLists.style";
 
-interface TodoProps {
+// props type
+interface OwnProps {
   todo: Todo;
-  onEditHandler: (e: React.FormEvent<HTMLFormElement>) => void;
+  setIsEdit: (value: React.SetStateAction<boolean>) => void;
 }
-const EditTrue = ({ todo, onEditHandler }: TodoProps) => {
+
+const EditTrue = ({ todo, setIsEdit }: OwnProps) => {
+  const navigate = useNavigate();
+
+  // custom hook - useTodoMutation()
+  const { updateTodoItem } = useTodoMutation();
+
+  // '수정완료'
+  const onEditHandler = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const newTitle = formData.get("title") as string;
+    const newContent = formData.get("content") as string;
+
+    todo && updateTodoItem({ todo, newTitle, newContent });
+    setIsEdit((prev) => !prev);
+    navigate("/");
+  };
+
   return (
     <>
       <form onSubmit={onEditHandler}>
