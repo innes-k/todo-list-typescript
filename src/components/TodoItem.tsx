@@ -2,7 +2,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteTodo, toggleTodo } from "../api/todos-api";
 import { Todo } from "../types/Todos";
 import * as St from "./styles/todoLists.style";
-import { Link } from "react-router-dom";
 
 type TodoItemProps = {
   todos: Todo[];
