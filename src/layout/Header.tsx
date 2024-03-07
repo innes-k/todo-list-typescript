@@ -1,10 +1,14 @@
+import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 const Header = () => {
   return (
-    <Title>
-      <span>☁️ Welcome to To Do List! ⛅️</span>
-    </Title>
+    <>
+      <Title>
+        <span>☁️ Welcome to To Do List! ⛅️</span>
+      </Title>
+      <Outlet />
+    </>
   );
 };
 
