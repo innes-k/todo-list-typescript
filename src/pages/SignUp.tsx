@@ -1,10 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { signUp } from "../api/auth-api";
 
 export const SignUp = () => {
+  const navigate = useNavigate();
+  const onSignUpHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    const formData = new FormData(e.currentTarget);
+    const id = formData.get("id") as string;
+    const nickname = formData.get("nickname") as string;
+    const password = formData.get("password") as string;
+
+    signUp({ id, nickname, password });
+    navigate("/login");
+  };
   return (
     <Container>
-      <Form>
+      <Form onSubmit={onSignUpHandler}>
         <p>☁️ 회원가입 ⛅️</p>
         <input type="text" name="id" placeholder="email" />
         <input type="text" name="nickname" placeholder="닉네임" />
