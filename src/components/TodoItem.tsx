@@ -1,8 +1,7 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteTodo, toggleTodo } from "../api/todos-api";
 import { Todo } from "../types/Todos";
 import * as St from "./styles/todoLists.style";
 import { useNavigate } from "react-router-dom";
+import { useTodoMutation } from "../hooks/useTodoMutation";
 
 type TodoItemProps = {
   todos: Todo[];
@@ -10,25 +9,9 @@ type TodoItemProps = {
 
 const TodoItem: React.FC<TodoItemProps> = ({ todos }) => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
-  const { mutate: deleteTodoItem } = useMutation({
-    mutationFn: (id: string): Promise<void> => deleteTodo(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["todos"],
-      });
-    },
-  });
-
-  const { mutate: toggleTodoItem } = useMutation({
-    mutationFn: (todo: Todo): Promise<void> => toggleTodo(todo),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["todos"],
-      });
-    },
-  });
+  // custom hook - useTodoMutation
+  const { deleteTodoItem, toggleTodoItem } = useTodoMutation();
 
   const removeHandler = (id: string): void => {
     const check = window.confirm("삭제하시겠습니까?");

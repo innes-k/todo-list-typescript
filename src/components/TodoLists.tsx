@@ -6,7 +6,7 @@ import { useTodoQuery } from "../hooks/useTodoQuery";
 const TodoLists: React.FC = () => {
   const [sortOrder, setSortOrder] = useState("asc");
 
-  // custom hook
+  // custom hook - useTodoQuery()
   const { todos, isLoading, isError } = useTodoQuery();
 
   if (isLoading) {

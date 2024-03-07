@@ -1,62 +1,23 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteTodo, toggleTodo, updateTodo } from "../api/todos-api";
 import * as St from "../components/styles/todoLists.style";
 import { Todo } from "../types/Todos";
 import { useState } from "react";
-import {
-  Container,
-  EditButton,
-  EditButtons,
-  EditCancelButton,
-  EditCompleteButton,
-  EditSection,
-} from "./detail.style";
 import { useTodoQuery } from "../hooks/useTodoQuery";
+import { useTodoMutation } from "../hooks/useTodoMutation";
+
+import EditTrue from "../components/Detail-editTrue";
+import { Container } from "../components/styles/InputBox.styles";
+import { EditButton } from "../components/styles/detail-editTrue.style";
 
 const Detail = () => {
   const paramsId = useParams().id;
   const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState(false);
 
-  const queryClient = useQueryClient();
+  // custom hook - useTodoMutation()
+  const { deleteTodoItem, toggleTodoItem, updateTodoItem } = useTodoMutation();
 
-  const { mutate: deleteTodoItem } = useMutation({
-    mutationFn: (id: string): Promise<void> => deleteTodo(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["todos"],
-      });
-    },
-  });
-
-  const { mutate: toggleTodoItem } = useMutation({
-    mutationFn: (todo: Todo): Promise<void> => toggleTodo(todo),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["todos"],
-      });
-    },
-  });
-
-  const { mutate: updateTodoItem } = useMutation({
-    mutationFn: ({
-      todo,
-      newTitle,
-      newContent,
-    }: {
-      todo: Todo;
-      newTitle: string;
-      newContent: string;
-    }): Promise<void> => updateTodo(todo, newTitle, newContent),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["todos"],
-      });
-    },
-  });
-
-  // custom hook
+  // custom hook - useTodoQuery()
   const { todos, isLoading, isError } = useTodoQuery();
 
   if (isLoading) return <div>Loading...</div>;
@@ -93,32 +54,7 @@ const Detail = () => {
       <Container>
         <St.TodoList>
           {isEdit ? (
-            <form onSubmit={onEditHandler}>
-              <EditSection>
-                <input
-                  type="text"
-                  name="title"
-                  defaultValue={todo.title}
-                ></input>
-                <input
-                  type="text"
-                  name="content"
-                  defaultValue={todo.content}
-                ></input>
-                <St.Time>
-                  {new Date(todo.deadline).toLocaleDateString("ko-KR", {
-                    year: "numeric",
-                    month: "long", // "long"을 사용하면 월 이름이 됨
-                    day: "numeric",
-                  })}
-                  까지
-                </St.Time>
-              </EditSection>
-              <EditButtons>
-                <EditCompleteButton type="submit">수정완료</EditCompleteButton>
-                <EditCancelButton>취소하기</EditCancelButton>
-              </EditButtons>
-            </form>
+            <EditTrue todo={todo} onEditHandler={onEditHandler} />
           ) : (
             <>
               <St.TodoListBody>
