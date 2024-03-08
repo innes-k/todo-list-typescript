@@ -2,6 +2,7 @@ import * as St from "../components/styles/todoLists.style";
 import { EditButton } from "../components/styles/detail-editTrue.style";
 import { Todo } from "../types/Todos";
 import { useTodoMutation } from "../hooks/useTodoMutation";
+import { useNavigate } from "react-router-dom";
 
 // props type
 interface OwnProps {
@@ -10,6 +11,8 @@ interface OwnProps {
 }
 
 const EditFalse = ({ todo, setIsEdit }: OwnProps) => {
+  const navigate = useNavigate();
+
   // custom hook - useTodoMutation()
   const { deleteTodoItem, toggleTodoItem } = useTodoMutation();
 
@@ -17,6 +20,7 @@ const EditFalse = ({ todo, setIsEdit }: OwnProps) => {
   const removeHandler = (id: string): void => {
     const check = window.confirm("삭제하시겠습니까?");
     check && deleteTodoItem(id);
+    navigate("/");
   };
 
   // '완료-취소' toggle
