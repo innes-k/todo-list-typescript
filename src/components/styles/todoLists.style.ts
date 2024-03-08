@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 export const Title = styled.div`
@@ -22,6 +23,11 @@ export const TodoListFlex = styled.div`
   margin-bottom: 2rem;
 `;
 
+export const DetailLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+`;
+
 export const TodoList = styled.article`
   border: 2px solid rgb(135, 206, 235);
   background-color: white;
@@ -29,6 +35,7 @@ export const TodoList = styled.article`
   width: 250px;
   padding: 20px 20px 10px 20px;
   margin: 14px;
+  cursor: pointer;
 
   display: flex;
   flex-direction: column;
@@ -68,6 +75,7 @@ export const RemoveBtn = styled.button`
   width: 80px;
   height: 30px;
   margin-bottom: 10px;
+  cursor: pointer;
 
   color: rgb(91, 91, 91);
   background-color: rgb(255, 236, 130);
@@ -78,6 +86,7 @@ export const RemoveBtn = styled.button`
 export const CompleteBtn = styled.button<{ $isDone: boolean }>`
   width: 80px;
   margin-bottom: 10px;
+  cursor: pointer;
 
   color: rgb(91, 91, 91);
   background-color: ${(props) =>

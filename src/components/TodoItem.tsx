@@ -1,38 +1,39 @@
 import { Todo } from "../types/Todos";
 import * as St from "./styles/todoLists.style";
+import { useNavigate } from "react-router-dom";
+import { useTodoMutation } from "../hooks/useTodoMutation";
 
 type TodoItemProps = {
   todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 };
 
-const TodoItem: React.FC<TodoItemProps> = ({ todos, setTodos }) => {
-  const reLocateHandler = (id: string): void => {
-    setTodos((prevTodos: Todo[]) =>
-      prevTodos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, isDone: !todo.isDone };
-        }
-        return todo;
-      })
-    );
+const TodoItem: React.FC<TodoItemProps> = ({ todos }) => {
+  const navigate = useNavigate();
+
+  // custom hook - useTodoMutation
+  const { deleteTodoItem, toggleTodoItem } = useTodoMutation();
+
+  const removeHandler = (id: string): void => {
+    const check = window.confirm("삭제하시겠습니까?");
+    check && deleteTodoItem(id);
   };
 
-  // 삭제버튼 onclick
-  const removeHandler = (id: string): void => {
-    const removeBox = todos.filter((todo) => {
-      return todo.id !== id;
-    });
-    setTodos(removeBox);
+  const reLocateHandler = (todo: Todo): void => {
+    toggleTodoItem(todo);
   };
+
+  const onDetailPageHandler = (id: string): void => {
+    navigate(`/detail/${id}`);
+  };
+
   return (
     <>
       {todos.map((todo) => {
         return (
           <St.TodoList key={todo.id}>
-            <St.TodoListBody>
+            <St.TodoListBody onClick={() => onDetailPageHandler(todo.id)}>
               <St.Span>{todo.title}</St.Span>
-              <p>{todo.body}</p>
+              <p>{todo.content}</p>
               <St.Time>
                 {new Date(todo.deadline).toLocaleDateString("ko-KR", {
                   year: "numeric",
@@ -47,7 +48,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todos, setTodos }) => {
                 삭제하기
               </St.RemoveBtn>
               <St.CompleteBtn
-                onClick={() => reLocateHandler(todo.id)}
+                onClick={() => reLocateHandler(todo)}
                 $isDone={todo.isDone}
               >
                 {todo.isDone ? "취소하기" : "완료하기"}

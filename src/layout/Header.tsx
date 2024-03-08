@@ -1,10 +1,18 @@
+import { Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const onHomeHandle = () => {
+    navigate("/");
+  };
   return (
-    <Title>
-      <span>☁️ Welcome to To Do List! ⛅️</span>
-    </Title>
+    <>
+      <Title>
+        <span onClick={onHomeHandle}>☁️ Welcome to To Do List! ⛅️</span>
+      </Title>
+      <Outlet />
+    </>
   );
 };
 
@@ -15,4 +23,7 @@ export const Title = styled.div`
   font-weight: bold;
   text-align: center;
   padding: 30px;
+  & > span {
+    cursor: pointer;
+  }
 `;
