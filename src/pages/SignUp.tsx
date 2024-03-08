@@ -48,7 +48,7 @@ const Form = styled.form`
   gap: 10px;
   border: 2px solid white;
   border-radius: 12px;
-  height: 45%;
+  height: 300px;
   width: 400px;
 
   & > p {
