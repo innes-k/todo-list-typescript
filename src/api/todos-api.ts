@@ -8,8 +8,8 @@ const todoClient = axios.create({
   },
 });
 
-export const getTodos = async (): Promise<Todo[]> => {
-  const res = await todoClient.get("/");
+export const getTodos = async () => {
+  const res = await todoClient.get<Todo[]>("/");
   return res.data;
 };
 

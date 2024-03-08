@@ -12,7 +12,7 @@ export const useTodoMutation = () => {
   const queryClient = useQueryClient();
 
   const { mutate: deleteTodoItem } = useMutation({
-    mutationFn: (id: string): Promise<void> => deleteTodo(id),
+    mutationFn: (id: string) => deleteTodo(id),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["todos"],
@@ -21,7 +21,7 @@ export const useTodoMutation = () => {
   });
 
   const { mutate: toggleTodoItem } = useMutation({
-    mutationFn: (todo: Todo): Promise<void> => toggleTodo(todo),
+    mutationFn: (todo: Todo) => toggleTodo(todo),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["todos"],
@@ -30,11 +30,8 @@ export const useTodoMutation = () => {
   });
 
   const { mutate: updateTodoItem } = useMutation({
-    mutationFn: ({
-      todo,
-      newTitle,
-      newContent,
-    }: UpdateTodoType): Promise<void> => updateTodo(todo, newTitle, newContent),
+    mutationFn: ({ todo, newTitle, newContent }: UpdateTodoType) =>
+      updateTodo(todo, newTitle, newContent),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["todos"],

@@ -13,7 +13,6 @@ export const Login = () => {
 
     try {
       const data = await UserLogin({ id, password });
-      console.log("data", data);
       sessionStorage.setItem("token", data.accessToken);
       navigate("/");
     } catch (error) {
